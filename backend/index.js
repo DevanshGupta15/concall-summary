@@ -78,9 +78,11 @@ app.post('/api/analyze-transcript', upload.single('pdf'), async (req, res) => {
     4. Actionable Investor Insights
     5. Forward-looking Growth Indicators
 
-    Respond in a clear, concise JSON format with each section well-explained.`;
+    Respond in a clear, concise JSON format with each section well-explained in short`;
 
     const result = await model.generateContent(prompt);
+    console.log('Full API response:', result);
+
     const response = await result.response;
     const analysisText = await response.text();
 
@@ -94,7 +96,9 @@ app.post('/api/analyze-transcript', upload.single('pdf'), async (req, res) => {
     let parsedAnalysis;
     try {
       parsedAnalysis = JSON.parse(cleanedAnalysis);
+      console.log("Parsed Analysis:", parsedAnalysis);
     } catch (error) {
+        
       parsedAnalysis = { rawAnalysis: cleanedAnalysis };
     }
 
